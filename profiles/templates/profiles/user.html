@@ -18,8 +18,7 @@
             <img class='profile-picture' src='{{ target.profile_picture.url }}'
              alt="profile-avatar">
             <div id="stats-container">
-                <p> Account age: {{ day_age }} days </p>
-                <p> Total calories logged: {{ calories_count }} </p>
+                <p> 나의 프로필 사진 </p>
             </div>
             <br/><br/>
             {% if user.is_authenticated and target.email == user.email %}
@@ -35,10 +34,8 @@
         <hr/>
         <section class="user-logs">
             {% if privacyMessage %}
-                <h2> Food Logs </h2>
                 <p> {{ privacyMessage }} </p>
             {% else %}
-                <h2> Food Logs ({{ logs|length }}) </h2>
                 {% if logs %}
                     <div class="logs-container">
                         {% for log in logs %}
