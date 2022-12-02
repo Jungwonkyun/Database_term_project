@@ -7,7 +7,7 @@ textarea {
 
 /* Comment form */
 form > button {
-    background-color: #56a3fa;
+    background-color: #9ac8fd;
     border: none;
     padding: 10px 20px;
     color: white;
@@ -24,9 +24,10 @@ form > button:active {
 
 /* Comments */
 .username-text {
-    color: cornflowerblue;
+    /*color: cornflowerblue;*/
+    color: black;
 }
 
 .comment-date {
-    color: grey;
+    color: rgb(0, 0, 0);
 }

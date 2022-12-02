@@ -7,8 +7,8 @@
 }
 
 .navbar a:hover {
-    background-color: skyblue;
-    color: black;
+    background-color: rgb(83, 88, 90);
+    color: rgb(255, 255, 255);
 }
 
 .navbar a#home {
