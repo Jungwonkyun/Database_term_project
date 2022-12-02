@@ -1,0 +1,102 @@
+{% extends "logs/logs_base.html" %}
+
+{% block page_title %}
+    {{ log.creator.username }}'s Log
+{% endblock %}
+
+{% block page_links %}
+    <script src="https://developer.edamam.com/attribution/badge.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/detail-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/detail-layout.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <main class="food-log-data">
+        {% if privacyMessage %}
+            {{ privacyMessage }}
+        {% else %}
+            <div class="log-container">
+                <h1> {{ log.food.name }} </h1>
+                <div class="log-body">
+                    <div class="log-food-info">
+                        <h2 class="body-header"> Description </h2>
+                        <p class="body-text textarea-output"> {{ log.food.desc }} </p>
+                    </div>
+                </div>
+                <br/>
+                {% if log.food.image %}
+                    <img class="log-image" src='{{ log.food.image.url }}' alt='log-image' />
+                {% endif %}
+                <br/>
+                <div class="log-footer">
+                    <h3>
+                        <a href="{% url 'profiles:user' log.creator.id %}">
+                            {{ log.creator.username }}
+                        </a>
+                        <br/>
+                        {{ log.pub_date }}
+                    </h3>
+                </div>
+                {% if user.email == log.creator.email %}
+                    <form id="delete-form" action="{% url 'logs:detail' log.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit"> Delete log </button>
+                    </form>
+                {% endif %}
+                <br/>
+            </div>
+        {% endif %}
+    </main>
+
+    {% if not privacyMessage %}
+        <section id="comments">
+            <h2 id="comment-header"> {{ comment_list|length }} Comments </h2>
+            {% if user.is_authenticated %}
+                <form id="comment-form" action="{% url 'logs:add-comment' log.id %}" method="post">
+                    {% csrf_token %}
+                    <label for="comment-text"></label>
+                    <textarea minlength="1" id="comment-text" name="comment-text"
+                              placeholder="Add a comment" required></textarea>
+                    <br/>
+                    <button type="submit"> Comment </button>
+                </form>
+            {% else %}
+                <p class="authenticate-message">
+                    <a href="{% url 'access:signup' %}">Sign up</a> to leave a comment!
+                </p>
+            {% endif %}
+            <br/>
+            {# Render comment list #}
+            {% if comment_list %}
+                <div id="comment-list-container">
+                    {% for comment in comment_list %}
+                        <div class="post-container">
+                            <div class="post-header">
+                                <img alt="Profile Icon" class="profile-icon"
+                                     src="{{ comment.creator.profile_picture.url }}"/>
+                            </div>
+                            <div class="post-body">
+                                <div class="post-body-data">
+                                    <div class="username-text">
+                                        <a href="{% url 'profiles:user' comment.creator.id %}">
+                                            {{ comment.creator.username }}
+                                        </a>
+                                    </div>
+                                    <div class="comment-date"> {{ comment.pub_date.date }} </div>
+                                </div>
+                                <p class="comment-body textarea-output"> {{ comment.comment }} </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p id="no-comments-message"> Be the first to comment. </p>
+            {% endif %}
+        </section>
+        {% if error_message %}
+            <p> {{ error_message }} </p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

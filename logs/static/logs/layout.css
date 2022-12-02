@@ -1,0 +1,8 @@
+.post-container {
+    display: grid;
+    justify-content: center;
+    /* Put space between icon and container text */
+    grid-gap: 5px;
+    margin-bottom: 5px;
+    grid-template-columns: var(--icon-size) 70%;
+}

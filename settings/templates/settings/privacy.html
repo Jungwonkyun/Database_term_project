@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Privacy Settings
+{% endblock %}
+
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'settings/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'settings/layout.css' %}">
+{% endblock %}
+
+{% block body %}
+    <h1> Privacy Settings </h1>
+    <form id="privacy-form" action="{% url 'settings:privacy' %}" method="post">
+        {% csrf_token %}
+        <label for="log-setting"> Logs Are Public </label>
+        {# Provides false value if checkbox unchecked #}
+        <input type="hidden" name="log-setting" value="False" />
+        {% if logValue == True %}
+            <input type="checkbox" id='log-setting' value="True" name="log-setting" checked/>
+        {% else %}
+            <input type="checkbox" id='log-setting' value="True" name="log-setting"/>
+        {% endif %}
+        <button type="submit"> Save Changes </button>
+    </form>
+{% endblock %}

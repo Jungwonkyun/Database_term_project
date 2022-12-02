@@ -1,0 +1,8 @@
+:root {
+    --icon-size: 50px;
+}
+
+img.profile-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}

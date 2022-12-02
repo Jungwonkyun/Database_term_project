@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% block page_title %} {% endblock %}
+{% endblock %}
+
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/layout.css' %}">
+    {% block page_links %} {% endblock %}
+{% endblock %}
+
+{% block body %}
+   {% block content %} {% endblock %}
+{% endblock %}

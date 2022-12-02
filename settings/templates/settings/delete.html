@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Delete Account
+{% endblock %}
+
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'settings/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'settings/layout.css' %}">
+{% endblock %}
+
+{% block body %}
+    <h1> Delete Your Account </h1>
+    <form id="email-form" action="{% url 'settings:delete-acc' %}" method="post">
+        {% csrf_token %}
+        <div id="form-fields">
+            {% if error %}
+                <p class="error-message"> {{ error }} </p>
+            {% endif %}
+            {% for field in form %}
+                <div class="error-message"> {{ field.errors }} </div>
+                <div class="input-field">
+                    {{ field.label_tag }}
+                    <br/>
+                    {{ field }}
+                </div>
+                <br/>
+            {% endfor %}
+            <button type="submit"> Delete Your Account </button>
+        </div>
+    </form>
+{% endblock %}

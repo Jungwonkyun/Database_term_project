@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} {% endblock %} </title>
+
+    {% load static %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href={% static 'styles.css' %}>
+    <link rel="stylesheet" type="text/css" href={% static 'nav-layout.css' %}>
+    <link rel="stylesheet" type="text/css" href={% static 'nav-style.css' %}>
+    {% block links %} {% endblock %}
+</head>
+<body>
+    {% block body %} {% endblock %}
+    <br/> <br/>
+</body>
+<footer>
+    {% if user.is_authenticated %}
+        <nav class="navbar">
+            <a id="home" href={% url 'logs:index' %}> 홈 </a>
+            <a id="nav-users" href={% url 'profiles:index' %}> 유저들 </a>
+            <a id="nav-create-log" href={% url 'logs:create-log' %}> 재능등록 </a>
+            <a id="nav-profile" href={% url 'profiles:user' user.id %}> 프로필 </a>
+            <a id="nav-settings" href={% url 'settings:index' %}> 세팅 </a>
+            <a id="nav-logout" href={% url 'access:logout' %}> 로그아웃 </a>
+        </nav>
+    {% endif %}
+</footer>
+</html>

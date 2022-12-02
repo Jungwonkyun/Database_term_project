@@ -1,0 +1,25 @@
+:root {
+    --link-color: #67b2e8;
+    --link-hover-color: #bfccff;
+}
+
+body {
+    text-align: center;
+}
+
+form {
+    background-color: #57a9d2;
+    border: 1px solid #b3b3b3;
+}
+
+a {
+    text-decoration: none;
+}
+
+#form-fields {
+    margin: 10px 0;
+}
+
+.input-field > input {
+    width: 40%;
+}

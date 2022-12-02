@@ -1,0 +1,41 @@
+{% extends 'logs/logs_base.html' %}
+
+{% block page_title %}
+    Create a Log
+{% endblock %}
+
+{% block page_links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'logs/create-log.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1> 판매하실 재능을 등록해주세요 </h1>
+    <main class="main-content">
+        <section class="food-log-form">
+            {% if user.is_authenticated %}
+                <form id="log-form" action="{% url 'logs:create-log' %}" method="post"
+                enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="form-fields">
+                        {% for field in form %}
+                            <div class="error-message"> {{ field.errors }} </div>
+                            <div class="input-field">
+                                {{ field.label_tag }}
+                                <br/>
+                                {{ field }}
+                            </div>
+                            <br/>
+                        {% endfor %}
+                        <button type="submit"> 재능등록 </button>
+                    </div>
+                </form>
+            {% else %}
+                <h2>
+                    You must be <a href="{% url 'access:signup' %}">logged in</a> to create a log!
+                </h2>
+            {% endif %}
+        </section>
+    </main>
+    <br/><br/>
+{% endblock %}

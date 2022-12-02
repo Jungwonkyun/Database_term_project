@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profiles
+{% endblock %}
+
+{% block links %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static 'profiles/layout.css' %}>
+    <link rel="stylesheet" type="text/css" href={% static 'profiles/styles.css' %}>
+{% endblock %}
+
+{% block body %}
+    <form id="query-form" action="{% url 'profiles:index' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+    <br/><br/>
+    {% if users %}
+        <ul>
+            {% for target in users %}
+                <li><a href="{% url 'profiles:user' target.id %}"> {{ target.username }} </a></li>
+            {% endfor %}
+        </ul>
+    {% else  %}
+        <p> No users currently exist! </p>
+    {% endif %}
+{% endblock %}
