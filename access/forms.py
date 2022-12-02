@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from .models import CustomUser
 
 max_username_len = 75
-min_username_len = 5
+min_username_len = 1
 min_password_len = 8
 
 

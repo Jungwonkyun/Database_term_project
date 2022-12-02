@@ -57,8 +57,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'FoodLog.urls'
-
+#ROOT_URLCONF = 'FoodLog.urls'
+ROOT_URLCONF = 'potential_market.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'FoodLog.wsgi.application'
+WSGI_APPLICATION = 'potential_market.wsgi.application'
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
